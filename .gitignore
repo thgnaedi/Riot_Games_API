@@ -1,0 +1,13 @@
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nbactions.xml
+
+*NOT_PUBLISH.java
+*.xml
+*.mf
+*.properties
