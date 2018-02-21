@@ -58,11 +58,12 @@ public class connect_to_rito {
 
         try {
             String url = "https://" + region + ".api.riotgames.com/lol/summoner/v3/summoners/by-name/" + URLEncoder.encode(sName, "UTF-8").replace("+", "%20") + "?api_key=" + key;
-            System.out.println(URLEncoder.encode(sName, "UTF-8").replace("+", "%20"));
             StringBuffer response = call_Rito(url);
             return new Summoner(response);
         } catch (Exception ex) {
             System.err.println(ex + "\t HTTP-Errorcode "+last_error +"\t Summoner name : " + sName);
+            if(last_error == 403)
+                System.err.println("your key might be expired, check https://developer.riotgames.com/");
             return null;
         }
     }
