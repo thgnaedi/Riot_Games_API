@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.Queue;
+
 /**
  *
  * @author thgnaedi
@@ -54,16 +55,17 @@ public class connect_to_rito {
         return response;
     }
 
-    public Summoner get_summoner(String sName){
+    public Summoner get_summoner(String sName) {
 
         try {
             String url = "https://" + region + ".api.riotgames.com/lol/summoner/v3/summoners/by-name/" + URLEncoder.encode(sName, "UTF-8").replace("+", "%20") + "?api_key=" + key;
             StringBuffer response = call_Rito(url);
             return new Summoner(response);
         } catch (Exception ex) {
-            System.err.println(ex + "\t HTTP-Errorcode "+last_error +"\t Summoner name : " + sName);
-            if(last_error == 403)
+            System.err.println(ex + "\t HTTP-Errorcode " + last_error + "\t Summoner name : " + sName);
+            if (last_error == 403) {
                 System.err.println("your key might be expired, check https://developer.riotgames.com/");
+            }
             return null;
         }
     }
@@ -84,11 +86,24 @@ public class connect_to_rito {
         return hist;
     }
 
-    //TODO 
-    public Champions get_Champions() throws Exception {
-        StringBuffer response = call_Rito(Champions.url);
-        System.out.println(response);
-        return null;
+ 
+    /**
+     * collects all Champions with id, trhey can be found in Champions.java as HashMap
+     * @throws Exception 
+     */
+    public void get_all_Champions() throws Exception {
+        StringBuffer response = call_Rito(Champions.DDRAGON_URL);
+        String resp = response.toString().replace(", ", ""); //remove all "," seperators in Champion story!
+        String[] allChamps = resp.split(",");
+        
+        //TODO collect more informations about champions, dont throw everything away!
+        Champions c = Champions.getChampions();
+        for (int i = 3; i < allChamps.length; i++) {     //index 0-3 are unnecessary informations
+            if(allChamps[i].startsWith("\"id\":")){      //new champion found! (champion data does not always have the same ammount of cells in array)
+                c.add_Champion(allChamps[i+1].substring(7,allChamps[i+1].length()-1), allChamps[i].substring(6,allChamps[i].length()-1));
+                i += 30;                                 //next few cells cant be a new champion.
+            }
+        }        
     }
 
 }
