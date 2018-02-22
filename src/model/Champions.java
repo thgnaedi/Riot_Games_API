@@ -28,7 +28,6 @@ public class Champions {
     
     public void add_Champion(String key, String value){
         champions.put(new Integer(key), value);
-        System.out.println(key + " " + value + " = " + new Integer(key));
     }
     
     public String get_Champion_by_ID(int id){
