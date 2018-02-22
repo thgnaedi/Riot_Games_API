@@ -21,7 +21,7 @@ public class RitoAPI {
                 System.out.println(sum);
                 History hist = rt.get_gameHistory(sum);
                 rt.get_all_Champions();
-                hist.get_Most_Played_Champions();
+                System.out.println(hist.get_Most_Played_Champions());
             }
 
         } catch (Exception ex) {
