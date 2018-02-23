@@ -11,7 +11,7 @@ public class Champions {
 
     public static final String DDRAGON_URL = "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json";
     private static Champions c = null;
-    private Map<Integer, String> champions;
+    private Map<Integer, Champion> champions;
 
     private Champions() {
         champions = new HashMap<>();
@@ -26,12 +26,12 @@ public class Champions {
         }
     }
     
-    public void add_Champion(String key, String value){
-        champions.put(new Integer(key), value);
+    public void add_Champion(String key, String value, int i){
+        champions.put(new Integer(key), new Champion(value,i));
     }
     
-    public String get_Champion_by_ID(int id){
-        return champions.get(new Integer(id));
+    public String get_Champion_name_by_ID(int id){
+        return champions.get(new Integer(id)).name;
     }
 
 }
