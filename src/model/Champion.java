@@ -6,9 +6,16 @@
 package model;
 
 /**
- *
+ *  Class not finished yet, just a tiny implementation for tests.
  * @author thgnaedi
  */
 public class Champion {
+    public final String name;
+    public final int start_index;   //index in String array where champion can be found
+    
+    public Champion(String name, int i){
+        this.name = name;
+        this.start_index = i;
+    }
     
 }
