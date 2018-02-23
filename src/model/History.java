@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashMap;
 import java.util.Queue;
 
 /**
@@ -30,7 +29,7 @@ public class History {
     private int[][] get_array_from_Queue() {
         int[][] unique = new int[matches.size()][2];        //[x][0] = champion id [x][1] = number of games with this champion
         int size = 0;                           //number of different champions currently in the array "unique"
-        int index = 0;
+        int index;
         boolean found;
         for (Match m : matches) {
             found = false;
@@ -94,7 +93,7 @@ public class History {
             if (current_champion == null) {
                 break;
             }
-            sb.append(c.get_Champion_by_ID(current_champion[0][0])).append(" (").append(current_champion[0][1]).append(")\n");
+            sb.append(c.get_Champion_name_by_ID(current_champion[0][0])).append(" (").append(current_champion[0][1]).append(")\n");
         }
         return sb.toString();
     }
