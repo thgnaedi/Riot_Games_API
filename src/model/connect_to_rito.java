@@ -100,7 +100,7 @@ public class connect_to_rito {
         Champions c = Champions.getChampions();
         for (int i = 3; i < allChamps.length; i++) {     //index 0-3 are unnecessary informations
             if(allChamps[i].startsWith("\"id\":")){      //new champion found! (champion data does not always have the same ammount of cells in array)
-                c.add_Champion(allChamps[i+1].substring(7,allChamps[i+1].length()-1), allChamps[i].substring(6,allChamps[i].length()-1));
+                c.add_Champion(allChamps[i+1].substring(7,allChamps[i+1].length()-1), allChamps[i].substring(6,allChamps[i].length()-1), i);
                 i += 30;                                 //next few cells cant be a new champion.
             }
         }        
